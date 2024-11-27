@@ -1,8 +1,9 @@
 <?php
+namespace App\Http\Controllers\Backend;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\Backend\Product;
+use App\Models\Backend\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -20,7 +21,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::where('status',1)->get();
+        return view('backend.pages.product.create')->with('categories',$categories);
     }
 
     /**

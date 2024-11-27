@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>AdminLTE 3 | Dashboard 2</title>
+    <title>Ecommerce</title>
 
-  @include('backend.includes.main-css')
- 
+    @include('backend.includes.main-css')
+
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">
- @include('backend.layout.header')
+    <div class="wrapper">
+        @include('backend.layout.header')
 
- @include('backend.layout.sidebar')
+        @include('backend.layout.sidebar')
 
- @yield('content')
+        @yield('content')
 
 
-@include('backend.layout.footer')
-</div>
-<!-- ./wrapper -->
+        @include('backend.layout.footer')
+    </div>
+    <!-- ./wrapper -->
 
-@include('backend.includes.main-js')
+    @include('backend.includes.main-js')
 
 </body>
-</html>
 
+</html>

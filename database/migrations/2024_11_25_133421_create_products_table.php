@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('category_id')->references('id')->on('categories')->constrained();
             $table->decimal('unit_price',8,2);
             $table->integer('stock_quantity')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('status')->default(1);
             $table->string('created_by');
             $table->timestamps();

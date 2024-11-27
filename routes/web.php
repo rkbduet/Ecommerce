@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
 //Category Routes
 Route::resource('category', CategoryController::class);
-
+Route::resource('product', ProductController::class);
 
 
 });

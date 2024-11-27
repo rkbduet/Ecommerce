@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
+
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Category;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::where('status', 1)->get();
+        return view('backend.pages.category.index')->with('categories', $categories);
     }
 
     /**
@@ -30,18 +32,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories|max:255',
+            'name' => 'required|unique:categories|max:255'
         ]);
 
-        $data=array();
-        $data['name']=$request->name;
-        $data['status']=1;
-        $data['created_by']=Auth::user()->name;
-        
+        $data = array();
+        $data['name'] = $request->name;
+        $data['status'] = 1;
+        $data['created_by'] = Auth::user()->name;
+
 
         Category::create($data);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -57,22 +59,38 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.pages.category.edit')->with('category', $category);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:categories|max:255',
+            'status'=> 'required|max:1'
+
+        ]);
+
+        $category=Category::findorfail($id);
+        $category->name=$request->name;
+        $category->status=$request->status;
+        $category->created_by=Auth::user()->name;
+
+        $category->save();
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $category = Category::findorfail($id);
+        $category->delete();
+        return redirect()->route('category.index');
     }
 }
