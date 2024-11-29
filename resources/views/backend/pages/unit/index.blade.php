@@ -13,8 +13,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Product</li>
+              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+              <li class="breadcrumb-item active">Units</li>
             </ol>
           </div>
         </div>
@@ -28,7 +28,8 @@
 
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">All Products List</h3>
+              <h3 class="card-title">All Uunits List</h3>
+              
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -36,32 +37,24 @@
                 <thead>
                 <tr>
                   <th>SL No</th>
-                  <th>Product Name</th>
-                  <th>Product code</th>
-                  <th>product category</th>
-                  <th>Unit</th>
-                  <th>Sell Price</th>
-                  <th>Stock Quanity</th>
+                  <th>Unit Name</th>
+                  <th>Short Name</th>
                   <th>Status</th>
                   <th>Action</th>
                 
                 </tr>
                 </thead>
                 <tbody>
-@foreach ($products as $product)
+@foreach ($units as $unit)
     
 <tr>
-    <td>{{$product->id}}</td>
-    <td>{{$product->product_name}}</td>
-    <td>{{$product->product_code}}</td>
-    <td>{{$product->category->name}}</td>
-    <td>{{$product->unit->name}}</td>
-    <td>{{$product->sell_price}}</td>
-    <td>{{$product->stock_quantity}}</td>
-    <td> @if($product->status==1) {{"Active"}} @else {{"Deactive"}} @endif</td>
-    <td> <a href="{{route('product.edit',$product->id)}}" class="btn btn-sm btn-outline-success">Edit</a> 
+    <td>{{$unit->id}}</td>
+    <td>{{$unit->name}}</td>
+    <td>{{$unit->short_name}}</td>
+    <td> @if($unit->status==1) {{"Active"}} @else {{"Deactive"}} @endif</td>
+    <td> <a href="{{route('unit.edit',$unit->id)}}" class="btn btn-sm btn-outline-success">Edit</a> 
      
-      <form action="{{route('product.destroy',$product->id)}}" method="post" style="display: inline;">
+      <form action="{{route('unit.destroy',$unit->id)}}" method="post" style="display: inline;">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-sm btn-outline-danger" onclick="deleteConfirm"> Delete</i></button>
